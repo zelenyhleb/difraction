@@ -8,7 +8,7 @@ const app = init();
 onChange();
 
 function init() {
-    initControl("wavelength", 380, 760, 20, 600);
+    initControl("wavelength", 380, 760, 5, 600);
     initControl("width", 5, 24, 0.1, 6);
     const app = new PIXI.Application({width: width, height: height});
     document.getElementById("viewport").appendChild(app.view);
@@ -59,7 +59,9 @@ function max(data) {
 }
 
 function colorStop(angle) {
-    return "rgba(" + angle + "," + angle + "," + angle + ",255)";
+    const color = rgb(lambda * Math.pow(10, 9));
+    const k = angle / 255;
+    return "rgba(" + (color.red * k) + "," + (color.green * k) + "," + (color.blue * k) + ",255)";
 }
 
 function update(id, label, size, n) {
