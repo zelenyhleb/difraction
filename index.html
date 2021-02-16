@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Дифракция</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <script src="https://pixijs.download/release/pixi.min.js"></script>
     <script src="optics.js"></script>
     <script src="color.js"></script>
@@ -15,6 +17,14 @@
     <p></p>
     <input type="range" id="wavelength" class="control">
     <div id="wavelength_state"></div>
+    <button id="random">Случайные значения</button>
+</div>
+<div class="description">
+    <h3>Дифракция на одной щели</h3>
+    Явление, которое проявляет себя как отклонение от законов геометрической оптики при распространении волн.
+    <p></p>
+    Здесь моделируется дифракция Фраунгофера (дифракция в параллельных лучах) на узкой щели. Расстояние от щели до
+    экрана сильно больше ширины отверстия.
 </div>
 <div id="viewport"></div>
 <script src="engine.js"></script>

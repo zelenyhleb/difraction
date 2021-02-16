@@ -10,6 +10,7 @@ onChange();
 function init() {
     initControl("wavelength", 380, 720, 5, 600);
     initControl("width", 5, 24, 0.1, 6);
+    document.getElementById("random").onclick = random;
     const app = new PIXI.Application({width: width, height: height});
     document.getElementById("viewport").appendChild(app.view);
     return app;
@@ -75,4 +76,12 @@ function onChange() {
     lambda = update("wavelength", "Длина волны", "нм", 9);
     app.stage.removeChildren();
     render();
+}
+
+function random() {
+    const width = 5 + Math.round(Math.random() * (240 - 50)) / 10;
+    const wavelength = 380 + Math.round(Math.random() * (720 - 380));
+    initControl("wavelength", 380, 720, 5, wavelength);
+    initControl("width", 5, 24, 0.1, width);
+    onChange();
 }

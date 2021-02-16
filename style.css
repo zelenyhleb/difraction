@@ -5,8 +5,39 @@
 }
 
 body {
+    font-family: 'Roboto Slab', serif;
     position: relative;
-    /*background: black;*/
+}
+
+button {
+    font-family: 'Roboto Slab', serif;
+    background-color: black;
+    color: white;
+    transition: all 0.2s;
+    height: 30px;
+    margin: 1rem;
+    border-radius: 5px;
+    border-style: none;
+}
+
+button:hover {
+    font-family: 'Roboto Slab', serif;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.description {
+    background-color: white;
+    position: absolute;
+    z-index: 9;
+    bottom: 1rem;
+    right: 1rem;
+    height: auto;
+    width: 300px;
+    border-radius: 5px;
+    text-align: justify;
+    padding: 1rem 1rem 3rem;
 }
 
 .controls {
@@ -16,8 +47,8 @@ body {
     z-index: 10;
     bottom: 1rem;
     left: 1rem;
-    height: 120px;
-    width: 170px;
+    height: auto;
+    width: 200px;
     border-radius: 5px;
 }
 
