@@ -1,39 +1,33 @@
 let lambda = 600 / Math.pow(10, 9);
-let d = 6 / Math.pow(10, 7);
+let d = 5 / Math.pow(10, 6);
 let l = 3;
-let i0 = 13;
+let i0 = 255;
+const width = window.innerWidth - 15;
+const height = window.innerHeight * 0.98;
 const app = init();
-render();
+onChange();
 
 function init() {
-    // document.getElementById("wavelength").onchange = onChange;
-    // document.getElementById("wavelength").min = 380;
-    // document.getElementById("wavelength").max = 760;
-    // document.getElementById("wavelength").step = 20;
-    // document.getElementById("wavelength").value = 600;
-    // document.getElementById("length").onchange = onChange;
-    // document.getElementById("length").min = 1;
-    // document.getElementById("length").max = 10;
-    // document.getElementById("length").step = 1;
-    // document.getElementById("length").value = 3;
-    document.getElementById("width").onchange = onChange;
-    document.getElementById("width").oninput = onChange;
-    document.getElementById("width").min = 1;
-    document.getElementById("width").max = 10;
-    document.getElementById("width").step = 0.2;
-    document.getElementById("width").value = 6;
-    document.getElementById("state").innerText = "Wavelength: 0.6 мкм"
-    const width = 1600;
-    const height = 900;
+    initControl("wavelength", 380, 760, 20, 600);
+    initControl("width", 5, 50, 0.1, 6);
     const app = new PIXI.Application({width: width, height: height});
     document.getElementById("viewport").appendChild(app.view);
     return app;
 }
 
+function initControl(id, min, max, step, value) {
+    document.getElementById(id).onchange = onChange;
+    document.getElementById(id).oninput = onChange;
+    document.getElementById(id).min = min;
+    document.getElementById(id).max = max;
+    document.getElementById(id).step = step;
+    document.getElementById(id).value = value;
+}
+
 function render() {
     const sprite = new PIXI.Sprite(texture());
-    sprite.width = 1600;
-    sprite.height = 900;
+    sprite.width = width;
+    sprite.height = height;
     app.stage.addChild(sprite);
 }
 
@@ -44,11 +38,9 @@ function texture() {
     canvas.height = 1;
     const ctx = canvas.getContext('2d');
     const grd = ctx.createLinearGradient(0, 0, quality, 0);
-    const tolerance = 100;
+    const tolerance = 1000;
     const data = image(i0, lambda, d, tolerance, l);
-    const amplitude = max(data) / 255;
     for (let i = 0; i < tolerance; i++) {
-        console.log(data[i]);
         grd.addColorStop(1 / tolerance * i, colorStop(data[i]));
     }
     ctx.fillStyle = grd;
@@ -70,12 +62,15 @@ function colorStop(angle) {
     return "rgba(" + angle + "," + angle + "," + angle + ",255)";
 }
 
+function update(id, label, size, n) {
+    const param = Math.round(document.getElementById(id).value * 10) / 10;
+    document.getElementById(id + "_state").innerText = label + ": " + param + " " + size;
+    return param / Math.pow(10, n);
+}
+
 function onChange() {
-    // lambda = document.getElementById("wavelength").value / Math.pow(10, 9);
-    d = document.getElementById("width").value / Math.pow(10, 7);
-    const mkms = Math.round(document.getElementById("width").value * 10) / 10;
-    document.getElementById("state").innerText = mkms + " мкм";
-    // l = document.getElementById("length").value;
+    d = update("width", "Ширина щели", "мкм", 6);
+    lambda = update("wavelength", "Длина волны", "нм", 9);
     app.stage.removeChildren();
     render();
 }

@@ -2,11 +2,11 @@
     Function returns light intensity for specified angle (phi)
  */
 function intensity(i0, lambda, b, phi) {
-    return i0 * Math.PI * Math.PI * b * b / lambda / lambda * sinc(2*phi) * sinc(2*phi);
+    return i0 * sinc(Math.PI * b * phi / lambda) * sinc(Math.PI * b * phi / lambda);
 }
 
 function image(i0, lambda, b, tolerance, l) {
-    const limit = Math.PI / 3;
+    const limit = Math.PI / 4;
     const lines = [];
     for (let i = 0; i < tolerance; i++) {
         const intens = intensity(i0, lambda, b, angle(i, limit, tolerance, l));
