@@ -3,8 +3,8 @@ const darkblueLimit = 450;
 const blueLimit = 480;
 const greenLimit = 510;
 const yellowLimit = 585;
-const orangeLimit = 620;
-const redLimit = 800;
+const redLimit = 720;
+const upperLimit = 760;
 
 /*
     Function returns factor to decrease light intensity on the edges of visible specter.
@@ -45,11 +45,11 @@ function rgb(wavelength) {
         red = blendFactorInverted(wavelength, yellowLimit, greenLimit);
         green = 1.0;
         blue = 0.0;
-    } else if (wavelength >= yellowLimit && wavelength < orangeLimit) {
+    } else if (wavelength >= yellowLimit && wavelength < redLimit) {
         red = 1.0;
-        green = blendFactor(wavelength, orangeLimit, yellowLimit);
+        green = blendFactor(wavelength, redLimit, yellowLimit);
         blue = 0.0;
-    } else if (wavelength >= orangeLimit && wavelength <= redLimit) {
+    } else if (wavelength >= redLimit && wavelength <= upperLimit) {
         red = 1.0;
         green = 0.0;
         blue = 0.0;

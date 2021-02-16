@@ -8,7 +8,7 @@ const app = init();
 onChange();
 
 function init() {
-    initControl("wavelength", 380, 760, 5, 600);
+    initControl("wavelength", 380, 720, 5, 600);
     initControl("width", 5, 24, 0.1, 6);
     const app = new PIXI.Application({width: width, height: height});
     document.getElementById("viewport").appendChild(app.view);
